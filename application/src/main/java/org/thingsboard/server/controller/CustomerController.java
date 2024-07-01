@@ -130,7 +130,7 @@ public class CustomerController extends BaseController {
     @PreAuthorize("hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     @ResponseBody
-    public Customer saveCustomer(@Parameter(description = "A JSON value representing the customer.") @RequestBody Customer customer) throws Exception {
+    public Customer saveCustomer(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "A JSON value representing the customer.") @RequestBody Customer customer) throws Exception {
         customer.setTenantId(getTenantId());
         checkEntity(customer.getId(), customer, Resource.CUSTOMER);
         return tbCustomerService.save(customer, getCurrentUser());
@@ -164,7 +164,7 @@ public class CustomerController extends BaseController {
             @RequestParam int page,
             @Parameter(description = CUSTOMER_TEXT_SEARCH_DESCRIPTION)
             @RequestParam(required = false) String textSearch,
-            @Parameter(description = SORT_PROPERTY_DESCRIPTION, schema = @Schema(allowableValues = {"createdTime", "title", "email", "country, city"}))
+            @Parameter(description = SORT_PROPERTY_DESCRIPTION, schema = @Schema(allowableValues = {"createdTime", "title", "email", "country", "city"}))
             @RequestParam(required = false) String sortProperty,
             @Parameter(description = SORT_ORDER_DESCRIPTION, schema = @Schema(allowableValues = {"ASC", "DESC"}))
             @RequestParam(required = false) String sortOrder) throws ThingsboardException {
